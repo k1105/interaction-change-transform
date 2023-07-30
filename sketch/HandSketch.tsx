@@ -87,10 +87,6 @@ export const HandSketch = ({ handpose }: Props) => {
         value: hand.score,
       });
     }
-    debugLog.current.push({
-      label: "subHandposeLength",
-      value: subHandposeArray.length,
-    });
 
     p5.clear();
 
@@ -108,6 +104,11 @@ export const HandSketch = ({ handpose }: Props) => {
       subHandposeArray.forEach((subHandpose, index) => {
         p5.push();
         p5.translate(subHandpose.position.x, subHandpose.position.y);
+        p5.push();
+        p5.noStroke();
+        p5.fill(220);
+        p5.text(subHandpose.name, 30, 0);
+        p5.pop();
         const posArr = subHandpose.getKeypoints(displayHands.left.pose);
         for (let i = 0; i < posArr.length - 1; i++) {
           p5.line(posArr[i].x, posArr[i].y, posArr[i + 1].x, posArr[i + 1].y);
